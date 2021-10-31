@@ -2,12 +2,12 @@ from tensorflow.keras import layers
 from tensorflow.keras import Model
 from tensorflow.keras.optimizers import Adam
 from tensorflow.python.keras.backend import rnn
-import ctc_loss as ctc
+from utils import ctc_loss
 from preprocessing import CHARACTERS
 
 FFT_LENGTH = 384
 
-def build_deepspeech(input_dim: int = FFT_LENGTH // 2 + 1, output_dim: int = len(CHARACTERS), rnn_layers: int = 5, rnn_units: int = 128):
+def build_deepspeech_model(input_dim: int = FFT_LENGTH // 2 + 1, output_dim: int = len(CHARACTERS), rnn_layers: int = 5, rnn_units: int = 128):
     """ Build deepspeech 2 model
 
     Args:
@@ -64,6 +64,6 @@ def build_deepspeech(input_dim: int = FFT_LENGTH // 2 + 1, output_dim: int = len
     model = Model(inputs=input_spectrogram, outputs=output, name='deepspeech_2')
 
     opt = Adam(learning_rate=1e-4)
-    model.compile(optimizer=opt, loss=ctc)
+    model.compile(optimizer=opt, loss=ctc_loss)
 
     return model
