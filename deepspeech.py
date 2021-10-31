@@ -1,13 +1,12 @@
 from tensorflow.keras import layers
 from tensorflow.keras import Model
 from tensorflow.keras.optimizers import Adam
-from tensorflow.python.keras.backend import rnn
 from utils import ctc_loss
 from preprocessing import CHARACTERS
 
 FFT_LENGTH = 384
 
-def build_deepspeech_model(input_dim: int = FFT_LENGTH // 2 + 1, output_dim: int = len(CHARACTERS), rnn_layers: int = 5, rnn_units: int = 128):
+def build_deepspeech_model(input_dim: int = FFT_LENGTH // 2 + 1, output_dim: int = 31, rnn_layers: int = 5, rnn_units: int = 128):
     """ Build deepspeech 2 model
 
     Args:
