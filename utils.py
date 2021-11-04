@@ -41,7 +41,7 @@ class CallbackEval(keras.callbacks.Callback):
         targets = []
         for batch in self.dataset:
             x, y = batch
-            batch_predictions = self.model.predict()
+            batch_predictions = self.model.predict(x)
             batch_predictions = decode_batch_predictions(batch_predictions)
             predictions.extend(batch_predictions)
             for label in y:
